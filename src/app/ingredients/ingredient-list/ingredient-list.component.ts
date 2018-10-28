@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Ingredient } from '../../models/Ingredient';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ingredient-list',
@@ -11,9 +12,12 @@ export class IngredientListComponent implements OnInit {
   @Input()
   ingredients: Ingredient[];
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+  editIngredient(index) {
+    this.router.navigate(['edit', index], { relativeTo: this.route });
+  }
 }

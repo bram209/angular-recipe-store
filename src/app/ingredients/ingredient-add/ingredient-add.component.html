@@ -1,4 +1,4 @@
-<h4>Add new ingredients</h4>
+<h4>{{ ingredientIndex === null ? 'Add new' : 'Edit'}} ingredients</h4>
 <div class="form-group">
   <div class="row">
     <div class="col-xs-6">
@@ -18,5 +18,19 @@
       <p>{{ingredientAmount}}</p>
     </div>
   </div>
-  <button type="button" class="btn btnprimary" [disabled]="isDisabled()" (click)="addIngredient()">Add ingredient</button>
+  <div class="row" *ngIf="ingredientIndex === null">
+    <button type="button" class="btn btnprimary" [disabled]="isDisabled()" (click)="addIngredient()">Add ingredient</button>
+  </div>
+  <div class="row" *ngIf="ingredientIndex !== null">
+    <div class="col-xs-6 ">
+      <button class="btn btn-default btn-block" type="button" (click)="deleteIngredient()" [disabled]="isDisabled()">
+        Delete ingredient
+      </button>
+    </div>
+    <div class="col-xs-6 ">
+      <button class="btn btn-primary btn-block" type="button" (click)="updateIngredient()" [disabled]="isDisabled()">
+        Update ingredient
+      </button>
+    </div>
+  </div>
 </div>

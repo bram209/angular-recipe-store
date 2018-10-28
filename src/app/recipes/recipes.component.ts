@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../models/Ingredient';
 import { IngredientsService } from '../ingredients/ingredients.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -18,7 +19,7 @@ export class RecipesComponent implements OnInit {
   ];
 
 
-  constructor(private ingredientsService: IngredientsService) { }
+  constructor(private ingredientsService: IngredientsService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,8 @@ export class RecipesComponent implements OnInit {
     ingredients.forEach(ingredient => {
       this.ingredientsService.addIngredient(ingredient);
     });
+    
+    this.router.navigate(['ingredients']);
   }
 
 }
