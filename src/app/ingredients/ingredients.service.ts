@@ -1,22 +1,35 @@
 import { Ingredient } from "../models/Ingredient";
 import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
+@Injectable()
 export class IngredientsService {
-    ingredientsChanged = new Subject<Ingredient[]>()
+    public ingredientsChanged = new Subject<Ingredient[]>()
+    private ingredients: Ingredient[];
 
-    private ingredients: Ingredient[] = [
-        new Ingredient('tomatoes', 15),
-        new Ingredient('cheese', 10)
-    ];
+    constructor(private httpClient: HttpClient) { }
 
     getIngredients() {
-        // Return a copy
-        return this.ingredients.slice();
+        if (this.ingredients) {
+            // Return a copy
+            return this.ingredients.slice();
+        } else {
+            this.httpClient
+                .get<Ingredient[]>('https://ordina-fontys-workshop.firebaseio.com/ingredients.json')
+                .subscribe((response) => {
+                    this.ingredients = response;
+                    this.ingredientsChanged.next(this.ingredients.slice());
+                });
+        }
     }
 
     addIngredient(ingredient: Ingredient) {
         this.ingredients.push(ingredient);
-        this.ingredientsChanged.next(this.ingredients);
+        this.httpClient.put('https://ordina-fontys-workshop.firebaseio.com/ingredients.json', this.ingredients)
+            .subscribe((response) => {
+                this.ingredientsChanged.next(response as Ingredient[]);
+            });
     }
 
 }
