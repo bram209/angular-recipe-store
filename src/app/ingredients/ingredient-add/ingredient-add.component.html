@@ -1,0 +1,22 @@
+<h4>Add new ingredients</h4>
+<div class="form-group">
+  <div class="row">
+    <div class="col-xs-6">
+      <label>Ingredient name:</label>
+    </div>
+    <div class="col-xs-6">
+      <input type="text" class="form-control" [(ngModel)]="ingredientName">
+      <p>{{ingredientName}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <label>Ingredient amount:</label>
+    </div>
+    <div class="col-xs-6">
+      <input type="number" min=1 class="form-control" [(ngModel)]="ingredientAmount">
+      <p>{{ingredientAmount}}</p>
+    </div>
+  </div>
+  <button type="button" class="btn btnprimary" [disabled]="isDisabled()" (click)="addIngredient()">Add ingredient</button>
+</div>
