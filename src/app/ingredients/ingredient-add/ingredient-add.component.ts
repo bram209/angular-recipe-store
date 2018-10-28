@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Ingredient } from '../../models/Ingredient';
+import { IngredientsService } from '../ingredients.service';
 
 @Component({
   selector: 'app-ingredient-add',
@@ -7,13 +8,10 @@ import { Ingredient } from '../../models/Ingredient';
   styleUrls: ['./ingredient-add.component.css']
 })
 export class IngredientAddComponent implements OnInit {
-  @Output()
-  ingredientAdded = new EventEmitter<Ingredient>();
-
   ingredientName: string
   ingredientAmount: number
 
-  constructor() {
+  constructor(private ingredientsService: IngredientsService) {
   }
 
   ngOnInit() {
@@ -21,7 +19,7 @@ export class IngredientAddComponent implements OnInit {
 
   addIngredient() {
     console.log(`Adding ingredient: ${this.ingredientAmount} x ${this.ingredientName}`);
-    this.ingredientAdded.emit({ name: this.ingredientName, amount: this.ingredientAmount })
+    this.ingredientsService.addIngredient(new Ingredient(this.ingredientName, this.ingredientAmount));
   }
 
   isDisabled() {

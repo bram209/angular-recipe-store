@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs/index';
 import { Ingredient } from '../models/Ingredient';
+import { IngredientsService } from './ingredients.service';
 
 @Component({
   selector: 'app-ingredients',
@@ -7,18 +9,18 @@ import { Ingredient } from '../models/Ingredient';
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-  
-  ingredients: Ingredient[] = [
-    new Ingredient('apples', 12), new Ingredient('bananas', 3)
-  ];
 
-  constructor() { }
+  ingredients: Ingredient[];
+
+  constructor(private ingredientsService: IngredientsService) { }
 
   ngOnInit() {
+    this.ingredients = this.ingredientsService.getIngredients();
+    this.ingredients = this.ingredientsService.getIngredients();
+    this.ingredientsService.ingredientsChanged.subscribe(
+      (ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      }
+    );
   }
-
-  onIngredientAdded(ingredient: Ingredient) {
-    this.ingredients.push(ingredient);
-  }
-
 }

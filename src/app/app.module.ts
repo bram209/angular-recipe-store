@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { IngredientListComponent } from './ingredients/ingredient-list/ingredient-list.component';
 import { IngredientAddComponent } from './ingredients/ingredient-add/ingredient-add.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { IngredientsService } from './ingredients/ingredients.service';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,14 @@ import { IngredientAddComponent } from './ingredients/ingredient-add/ingredient-
     IngredientsComponent,
     IngredientListComponent,
     IngredientAddComponent,
+    RecipesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [IngredientsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
