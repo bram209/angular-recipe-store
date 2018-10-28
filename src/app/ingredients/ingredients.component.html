@@ -1,9 +1,9 @@
 <h3>Here you will find all the ingredients!</h3>
 <div class="row">
   <div class="col-xs-6">
-    <app-ingredient-list></app-ingredient-list>
+    <app-ingredient-list [ingredients]="ingredients"></app-ingredient-list>
   </div>
   <div class="col-xs-6">
-    <app-ingredient-add></app-ingredient-add>
+    <app-ingredient-add (ingredientAdded)="onIngredientAdded($event)"></app-ingredient-add>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Ingredient } from '../../models/Ingredient';
 
 @Component({
   selector: 'app-ingredient-add',
@@ -6,18 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ingredient-add.component.css']
 })
 export class IngredientAddComponent implements OnInit {
+  @Output()
+  ingredientAdded = new EventEmitter<Ingredient>();
 
   ingredientName: string
   ingredientAmount: number
 
   constructor() {
-   }
+  }
 
   ngOnInit() {
   }
 
   addIngredient() {
-    console.log(`Adding ingredient: ${this.ingredientAmount} x ${this.ingredientName}`)
+    console.log(`Adding ingredient: ${this.ingredientAmount} x ${this.ingredientName}`);
+    this.ingredientAdded.emit({ name: this.ingredientName, amount: this.ingredientAmount })
   }
 
   isDisabled() {
